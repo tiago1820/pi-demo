@@ -10,3 +10,6 @@ CREATE DATABASE repasoa;
 # Para ver las tablas que hay en la base de datos:
 \dt
 
+# Para ver lo que hay en un tabla:
+SELECT * FROM "Users";
+
