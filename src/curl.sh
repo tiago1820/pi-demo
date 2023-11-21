@@ -6,7 +6,7 @@
 # POST a la ruta users
 curl -X POST -H "Content-Type: application/json" -d '{
   "name": "Bartolomiau",
-  "username": "Barto",
+  "email": "Barto@catemail.com",
   "phone": 789456123
 }' http://localhost:3001/users
 
