@@ -17,6 +17,16 @@ const sequelize = new Sequelize(
 UsersModel(sequelize);
 PostModel(sequelize);
 
+// Crear las relaciones
+const { User, Post } = sequelize.models;
+
+// Un usuario puede tener muchos posts
+User.hasMany(Post);
+// Un post pertenece a un solo usuario
+Post.belongsTo(User);
+
+
 module.exports = {
+    ...sequelize.models,
     conn: sequelize
 }
