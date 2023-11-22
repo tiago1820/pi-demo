@@ -1,15 +1,36 @@
-const { createUserDB } = require("../controllers/userController");
+const { createUserDB, getUserById, getAllUsers, getUserByName } = require("../controllers/userController");
 
-const getUsersHandler = (req, res) => {
-    const { name, race } = req.query;
-    if (name) res.status(200).send(`Aqui estan todos los usuarios ${name}`);
-    res.status(200).send(`Todos los usuarios`);
+const getUsersHandler = async (req, res) => {
+    const { name } = req.query;
+
+    try {
+        if (name) {
+            const userByName = await getUserByName(name);
+            res.status(200).json(userByName);
+        } else {
+            const response = await getAllUsers()
+            res.status(200).json(response);
+        }
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+
 };
 
-const getDetailHandler = (req, res) => {
-    const { id } = req.params
 
-    res.status(200).send(`Detalle del usuario ${id}`);
+const getDetailHandler = async (req, res) => {
+    const { id } = req.params;
+
+    const source = isNaN(id) ? 'bdd' : 'api';
+
+    try {
+        const response = await getUserById(id, source);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
 };
 
 const createUserHandler = async (req, res) => {
@@ -22,7 +43,6 @@ const createUserHandler = async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 
-    res.status(200).send(`Usuario ${name} creado con el email ${email}`);
 };
 
 

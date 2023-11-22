@@ -4,8 +4,6 @@ const { createPostHandler } = require('../handles/postHandler');
 
 const postsRouter = Router();
 
-postsRouter.post("/", (req, res) => {
-    res.status(200).send("Crear un post");
-});
+postsRouter.post('/', createPostHandler);
 
 module.exports = postsRouter;

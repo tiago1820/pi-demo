@@ -10,3 +10,11 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "phone": 789456123
 }' http://localhost:3001/users
 
+
+curl "http://localhost:3001/users?name=Leanne%20Graham"
+
+curl -X POST -H "Content-Type: application/json" -d '{
+  "title": "Repaso de PI",
+  "body": "El instructor es Fulano da Silva",
+  "userId": "ac49336d-b4b7-4448-97ed-8500f860d3be"
+}' http://localhost:3001/posts
